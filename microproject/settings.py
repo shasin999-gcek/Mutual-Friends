@@ -25,7 +25,7 @@ SECRET_KEY = 'zlf7nadf7er8#5sk_6zpujb^tudfi!h7=@ej*b$b@gjy4+@!hk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mutual-friend-app.herokuapp.com']
 
 
 # Application definition
