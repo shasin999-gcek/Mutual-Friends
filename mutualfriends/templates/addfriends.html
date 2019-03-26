@@ -1,0 +1,46 @@
+{% extends "layouts/layout.html" %}
+
+{% block content %}
+
+<div class="container" style="margin-top: 5%; width: 70%;">
+  <div class="card text-center">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'myfriends' %}">My Friends</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'addfriends' %}">Add Friends</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'friendrequests' %}">Friend Requests</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      {% if addfriends %}
+        <table class="table table-striped" style="border: 0;">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for addfriend in addfriends %}
+              <tr>
+                <td>{{ addfriend.first_name }} {{ addfriend.last_name }}</td>
+                <td><a href="{% url 'sentfriendrequest' addfriend.id %}" class="btn btn-success btn-sm" role="button">Add Friend</a>
+                <a href="{% url 'profile' addfriend.id %}" class="btn btn-success btn-sm" role="button">View Profile</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <kbd>No users is left to add as friends</kbd>
+      {% endif %}  
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

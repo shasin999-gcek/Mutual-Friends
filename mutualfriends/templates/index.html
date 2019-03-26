@@ -1,0 +1,15 @@
+{% extends "layouts/layout.html" %}
+
+{% block content %}
+
+  <div class="container content">
+    <div class="jumbotron">
+      <h1 class="display-4">Welcome to Mutual Friends Web App</h1>
+      <p class="lead">This web app allows users to login, register, add friends, see mutual friends etc</p>
+      <hr class="my-4">
+      <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Login</a>
+      <a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">Register</a>
+    </div>
+  </div>
+
+{% endblock content %}

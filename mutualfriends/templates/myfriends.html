@@ -1,0 +1,45 @@
+{% extends "layouts/layout.html" %}
+
+{% block content %}
+
+<div class="container" style="margin-top: 5%; width: 70%;">
+  <div class="card text-center">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'myfriends' %}">My Friends</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'addfriends' %}">Add Friends</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'friendrequests' %}">Friend Requests</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      {% if friends %}
+        <table class="table table-striped" style="border: 0;">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for friendship in friends %}
+              <tr>
+                <td>{{ friendship.user.first_name }} {{ friendship.user.last_name }}</td>
+                <td><a href="{% url 'profile' friendship.user.id %}" class="btn btn-success btn-sm" role="button">View profile</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <kbd>You have no friends, Try adding some friends</kbd>
+      {% endif %}  
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

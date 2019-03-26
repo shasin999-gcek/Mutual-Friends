@@ -1,0 +1,85 @@
+{% extends "layouts/layout.html" %}
+
+{% block content %}
+
+<div class="container" style="margin-top: 5%; width: 70%;">
+  <div class="card text-center">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'myfriends' %}">My Friends</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'addfriends' %}">Add Friends</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'friendrequests' %}">Friend Requests</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+
+      <div class="card">
+        <div class="card-header">
+          Sented Requests
+        </div>
+        <div class="card-body">
+          {% if sented %}
+            <table class="table table-striped" style="border: 0;">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for request in sented %}
+                  <tr>
+                    <td><a href="{% url 'profile' request.to_user.id %}">{{ request.to_user.first_name }} {{ request.to_user.last_name }}</a></td>
+                    <td><kbd>Pending<kbd></td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <kbd>You have not sent any friend requests</kbd>
+          {% endif %}  
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 20px;">
+        <div class="card-header">
+          Received Requests
+        </div>
+        <div class="card-body">
+          {% if received %}
+            <table class="table table-striped" style="border: 0;">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for request in received %}
+                  <tr>
+                    <td><a href="{% url 'profile' request.from_user.id %}">{{ request.from_user.first_name }} {{ request.from_user.last_name }}</a></td>
+                    <td>
+                      <a href="{% url 'acceptfriend' request.from_user.id %}" class="btn btn-success btn-sm" role="button">Confirm</a>
+                      <a href="{% url 'rejectfriend' request.from_user.id %}" class="btn btn-danger btn-sm" role="button">Reject</a>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <kbd>You have not received any friend requests</kbd>
+          {% endif %}  
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

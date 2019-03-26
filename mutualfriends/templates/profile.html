@@ -1,0 +1,71 @@
+{% extends "layouts/layout.html" %}
+
+{% block content %}
+
+<div class="container">
+  <div class="card text-center" style="margin-top: 8%">
+    <div class="card-header">
+      {{ profileInfo.first_name }}'s Profile
+    </div>
+    <div class="card-body">
+      
+      <div class="row">
+        <div class="col-4">
+          <div class="card" style="width: 18rem;">
+            <div class="card-header">
+              {{ profileInfo.first_name }} {{ profileInfo.last_name }}
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">@{{ profileInfo.username }}</li>
+              <li class="list-group-item">{{ profileInfo.email }}</li>
+            </ul>
+          </div>
+        </div>  
+
+ 
+        <div class="col-8">
+          <table class="table table-bordered">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">MutualFriends</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if mutualfriends %}
+                {% for mutualfriend in mutualfriends %}
+                  <tr><td>{{ mutualfriend.first_name }} {{ mutualfriend.last_name }}</td></tr>
+                {% endfor %}
+              {% else %}
+                <tr><td><kbd>No mutual friends</kbd></td></tr>
+              {% endif %}  
+              
+            </tbody>
+          </table>
+
+          <table class="table table-bordered" style="margin-top: 20px;">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">{{ profileInfo.first_name }}'s Friends</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if friends %}
+                {% for friend in friends %}
+                  <tr><td>{{ friend.user.first_name }} {{ friend.user.last_name }}</td></tr>
+                {% endfor %}
+              {% else %}
+                <tr><td><kbd>No friends</kbd></td></tr>
+              {% endif %} 
+            </tbody>
+          </table>
+        </div>
+      </div>  
+    </div>
+
+    <div class="card-footer text-muted">
+      True friend never cheats
+    </div>
+  </div>
+</div> 
+
+{% endblock %}
